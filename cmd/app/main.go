@@ -2,11 +2,13 @@ package main
 
 import (
 	"flag"
+	"io/ioutil"
 	"log"
 	"net/http"
 	"os"
 
 	"encoding/json"
+
 	"github.com/kkweon/timebot"
 )
 
@@ -90,7 +92,13 @@ func slackHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	var oauth OAuthGenerated
-	err = json.NewDecoder(resp.Body).Decode(&oauth)
+	allbyte, err := ioutil.ReadAll(resp.Body)
+	if err != nil {
+		panic(err)
+	}
+	log.Println(string(allbyte))
+	err = json.Unmarshal(allbyte, &oauth)
+	// err = json.NewDecoder(resp.Body).Decode(&oauth)
 
 	if err != nil {
 		http.Error(w, "Fail while decoding JSON", http.StatusInternalServerError)
