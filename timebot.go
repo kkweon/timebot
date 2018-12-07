@@ -62,3 +62,15 @@ func ToKoreaTime(t time.Time) string {
 func ToCaliforniaTime(t time.Time) string {
 	return t.In(californiaTZ).Format(formats[0] + " MST")
 }
+
+// IsTargetMessage checks if t contains time
+func IsTargetMessage(t string) (string, bool) {
+	zones := []string{KST, PST, PDT}
+
+	for _, z := range zones {
+		if strings.Contains(t, z) {
+			return z, true
+		}
+	}
+	return "", false
+}

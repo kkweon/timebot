@@ -54,3 +54,17 @@ func TestToCaliforniaTime(t *testing.T) {
 		t.Fatal("Expected", expected, "but got", tried)
 	}
 }
+
+func TestIsTargetMessage(t *testing.T) {
+	input := "aljdslf"
+
+	if result, ok := IsTargetMessage(input); ok || result != "" {
+		t.Fatal(input, "should be  not interesting :(")
+	}
+
+	input = "2018-01-03 10:37 PST"
+
+	if result, ok := IsTargetMessage(input); result != PST || !ok {
+		t.Fatal(input, "should be interesting :(")
+	}
+}
