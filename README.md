@@ -1,4 +1,5 @@
-# tiembot
+# timebot
+[![Build Status](https://travis-ci.com/kkweon/timebot.svg?branch=master)](https://travis-ci.com/kkweon/timebot)
 
 
 Convert
