@@ -8,8 +8,7 @@ import (
 
 // Main runs app
 func Main(token string, debug bool) {
-	api := slack.New(token)
-	api.SetDebug(debug)
+	api := slack.New(token, slack.OptionDebug(debug))
 
 	rtm := api.NewRTM()
 	go rtm.ManageConnection()
